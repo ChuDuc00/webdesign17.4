@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Phép Tính</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    input[type="number"] {
+      width: 50px;
+      text-align: center;
+    }
+
+    button {
+      margin-left: 5px;
+    }
+
+    #history span {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    .highlight {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h3>Các phép toán</h3>
+
+  <!-- Phép cộng -->
+  <div>
+    phép cộng
+    <input type="number" id="a1"> +
+    <input type="number" id="b1">
+    <button onclick="calculate('add')">=</button>
+    <input type="text" id="result1" readonly>
+  </div><br>
+
+  <!-- Phép trừ -->
+  <div>
+    phép trừ
+    <input type="number" id="a2"> -
+    <input type="number" id="b2">
+    <button onclick="calculate('sub')">=</button>
+    <input type="text" id="result2" readonly>
+  </div><br>
+
+  <!-- Phép nhân -->
+  <div>
+    phép nhân
+    <input type="number" id="a3"> ×
+    <input type="number" id="b3">
+    <button onclick="calculate('mul')">=</button>
+    <input type="text" id="result3" readonly>
+  </div><br>
+
+  <!-- Phép chia -->
+  <div>
+    phép chia
+    <input type="number" id="a4"> ÷
+    <input type="number" id="b4">
+    <button onclick="calculate('div')">=</button>
+    <input type="text" id="result4" readonly>
+  </div><br>
+
+  <h3>Các phép toán vừa thực hiện</h3>
+  <div id="history"></div>
+
+  <script>
+    function calculate(type) {
+      let a, b, result, text = "";
+
+      // Xoá class đỏ cũ trước khi tô màu mới
+      const history = document.getElementById("history");
+      for (let span of history.querySelectorAll("span")) {
+        span.classList.remove("highlight");
+      }
+
+      switch (type) {
+        case 'add':
+          a = +document.getElementById("a1").value;
+          b = +document.getElementById("b1").value;
+          result = a + b;
+          document.getElementById("result1").value = result;
+          text = `PHÉP CỘNG ${a}+${b}=${result}`;
+          break;
+        case 'sub':
+          a = +document.getElementById("a2").value;
+          b = +document.getElementById("b2").value;
+          result = a - b;
+          document.getElementById("result2").value = result;
+          text = `PHÉP TRỪ ${a}-${b}=${result}`;
+          break;
+        case 'mul':
+          a = +document.getElementById("a3").value;
+          b = +document.getElementById("b3").value;
+          result = a * b;
+          document.getElementById("result3").value = result;
+          text = `PHÉP NHÂN ${a}×${b}=${result}`;
+          break;
+        case 'div':
+          a = +document.getElementById("a4").value;
+          b = +document.getElementById("b4").value;
+          result = b !== 0 ? (a / b).toFixed(2) : "Không chia được";
+          document.getElementById("result4").value = result;
